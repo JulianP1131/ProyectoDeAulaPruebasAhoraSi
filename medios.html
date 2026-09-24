@@ -10,9 +10,9 @@
 </head>
 <body>
 <div class="app">
-# Emiro es re gay
+
   <aside class="barra-lateral">
-    <div>
+    <header>
       <div class="logo-app">
         <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
         <div>
@@ -29,8 +29,8 @@
         <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
         <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
       </nav>
-    </div>
-    <div class="pie-lateral">
+    </header>
+    <footer class="pie-lateral">
       <div class="tarjeta-usuario">
         <div style="display:flex; align-items:center; gap:10px;">
           <div class="avatar">CM</div>
@@ -42,7 +42,7 @@
         <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
       </div>
       <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
-    </div>
+    </footer>
   </aside>
 
   <main class="contenido">
@@ -55,8 +55,8 @@
       </div>
     </header>
 
-    <div class="zona-vistas">
-      <div class="tarjeta">
+    <section class="zona-vistas">
+      <article class="tarjeta">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
           <div>
             <h3 style="font-size:22px; font-weight:800;">Medios de Pago del Hogar</h3>
@@ -68,7 +68,7 @@
 
         <div class="rejilla-4">
 
-          <div class="tarjeta-banco banco-negra">
+          <article class="tarjeta-banco banco-negra">
             <div style="display:flex; justify-content:space-between;">
               <span style="font-size:12px; color:#cbd5e1;">Tarjeta Debito</span>
               <i class="fa-solid fa-building-columns" style="color:#94a3b8;"></i>
@@ -84,9 +84,9 @@
               </div>
               <span class="etiqueta" style="background-color:rgba(14,165,233,0.2); color:#7dd3fc;">Principal</span>
             </div>
-          </div>
+          </article>
 
-          <div class="tarjeta-banco banco-azul">
+          <article class="tarjeta-banco banco-azul">
             <div style="display:flex; justify-content:space-between;">
               <span style="font-size:12px;">Tarjeta de Credito</span>
               <i class="fa-brands fa-cc-visa" style="font-size:22px;"></i>
@@ -102,9 +102,9 @@
               </div>
               <span class="etiqueta" style="background-color:rgba(255,255,255,0.2);">Activa</span>
             </div>
-          </div>
+          </article>
 
-          <div class="tarjeta-banco banco-morada">
+          <article class="tarjeta-banco banco-morada">
             <div style="display:flex; justify-content:space-between;">
               <span style="font-size:12px;">Transferencia Bancaria</span>
               <i class="fa-solid fa-mobile-screen-button"></i>
@@ -120,9 +120,9 @@
               </div>
               <span class="etiqueta" style="background-color:rgba(255,255,255,0.2);">Sincronizado</span>
             </div>
-          </div>
+          </article>
 
-          <div class="tarjeta-banco banco-verde">
+          <article class="tarjeta-banco banco-verde">
             <div style="display:flex; justify-content:space-between;">
               <span style="font-size:12px;">Efectivo Fisico</span>
               <i class="fa-solid fa-money-bill-1-wave"></i>
@@ -138,7 +138,7 @@
               </div>
               <span class="etiqueta" style="background-color:rgba(255,255,255,0.2);">En casa</span>
             </div>
-          </div>
+          </article>
 
         </div>
 
@@ -146,8 +146,8 @@
           <div class="icono-redondo"><i class="fa-solid fa-shield-halved"></i></div>
           <p><strong>Proteccion de Privacidad Familiar:</strong> House Pay Assistant nunca almacena CVV, claves bancarias ni datos confidenciales completos. Solo registramos identificadores seguros para asociar quien pago cada factura.</p>
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   </main>
 </div>
 
@@ -164,7 +164,8 @@
     <form class="formulario">
       <div class="campo">
         <label for="m-tipo">Tipo de Medio</label>
-        <select id="m-tipo">
+        <select id="m-tipo" name="m-tipo" required>
+          <option value="" selected disabled>Selecciona tipo de medio...</option>
           <option>Tarjeta de credito</option>
           <option>Tarjeta debito</option>
           <option>Transferencia bancaria / Nequi</option>
@@ -173,11 +174,11 @@
       </div>
       <div class="campo">
         <label for="m-nombre">Nombre Identificativo</label>
-        <input type="text" id="m-nombre" placeholder="Ej. Visa Hogar, Cuenta Ahorros...">
+        <input type="text" id="m-nombre" name="m-nombre" required minlength="3" maxlength="40" placeholder="Ej. Visa Hogar, Cuenta Ahorros...">
       </div>
       <div class="campo">
         <label for="m-digitos">Ultimos 4 Digitos (Ficticios)</label>
-        <input type="text" id="m-digitos" maxlength="4" placeholder="Ej. 8841">
+        <input type="text" id="m-digitos" name="m-digitos" required minlength="4" maxlength="4" pattern="[0-9]{4}" inputmode="numeric" title="Ingresa exactamente 4 digitos numericos" placeholder="Ej. 8841">
       </div>
       <div class="formulario-acciones">
         <a href="medios.html" class="boton boton-secundario">Cancelar</a>
