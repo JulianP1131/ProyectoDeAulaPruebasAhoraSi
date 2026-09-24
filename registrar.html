@@ -12,7 +12,7 @@
 <div class="app">
 
   <aside class="barra-lateral">
-    <div>
+    <header>
       <div class="logo-app">
         <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
         <div>
@@ -29,8 +29,8 @@
         <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
         <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
       </nav>
-    </div>
-    <div class="pie-lateral">
+    </header>
+    <footer class="pie-lateral">
       <div class="tarjeta-usuario">
         <div style="display:flex; align-items:center; gap:10px;">
           <div class="avatar">CM</div>
@@ -42,7 +42,7 @@
         <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
       </div>
       <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
-    </div>
+    </footer>
   </aside>
 
   <main class="contenido">
@@ -55,8 +55,8 @@
       </div>
     </header>
 
-    <div class="zona-vistas" style="max-width:700px;">
-      <div class="tarjeta">
+    <section class="zona-vistas" style="max-width:700px;">
+      <article class="tarjeta">
         <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--gris-100);">
           <div class="icono-redondo" style="background-color:var(--azul-500); color:#fff;"><i class="fa-solid fa-file-invoice-dollar"></i></div>
           <div>
@@ -70,13 +70,13 @@
 
           <div class="campo">
             <label for="g-nombre">Nombre o Descripcion del Gasto *</label>
-            <input type="text" id="g-nombre" required placeholder="Ej. Servicio de gas, Compra semanal Exito, Cuota colegio...">
+            <input type="text" id="g-nombre" name="g-nombre" required minlength="3" maxlength="80" placeholder="Ej. Servicio de gas, Compra semanal Exito, Cuota colegio...">
           </div>
 
           <div class="campo-doble mb-16">
             <div class="campo" style="margin-bottom:0;">
               <label for="g-valor">Valor (COP) *</label>
-              <input type="number" id="g-valor" required min="100" placeholder="Ej. 85000">
+              <input type="number" id="g-valor" name="g-valor" required min="100" max="50000000" step="100" inputmode="numeric" placeholder="Ej. 85000">
               <div style="display:flex; gap:8px; margin-top:8px;">
                 <span class="etiqueta etiqueta-gris">+20k</span>
                 <span class="etiqueta etiqueta-gris">+50k</span>
@@ -85,7 +85,7 @@
             </div>
             <div class="campo" style="margin-bottom:0;">
               <label for="g-categoria">Categoria del Hogar *</label>
-              <select id="g-categoria" required>
+              <select id="g-categoria" name="g-categoria" required>
                 <option value="" selected disabled>Selecciona categoria...</option>
                 <option>Servicios publicos</option>
                 <option>Mercado</option>
@@ -100,17 +100,17 @@
           <div class="campo-doble mb-16">
             <div class="campo" style="margin-bottom:0;">
               <label for="g-fecha">Fecha de Pago *</label>
-              <input type="date" id="g-fecha" required>
+              <input type="date" id="g-fecha" name="g-fecha" required>
             </div>
             <div class="campo" style="margin-bottom:0;">
               <label for="g-vencimiento">Fecha de Vencimiento (Opcional)</label>
-              <input type="date" id="g-vencimiento">
+              <input type="date" id="g-vencimiento" name="g-vencimiento">
             </div>
           </div>
 
           <div class="campo">
             <label for="g-medio">Medio de Pago Utilizado (Obligatorio) *</label>
-            <select id="g-medio" required>
+            <select id="g-medio" name="g-medio" required>
               <option value="" selected disabled>Selecciona medio de pago registrado...</option>
               <option>Tarjeta debito Bancolombia (••3410)</option>
               <option>Tarjeta de credito Visa Hogar (••9822)</option>
@@ -125,8 +125,8 @@
             <button type="submit" class="boton boton-primario"><i class="fa-solid fa-check"></i><span>Guardar y Actualizar Saldos</span></button>
           </div>
         </form>
-      </div>
-    </div>
+      </article>
+    </section>
   </main>
 </div>
 </body>
