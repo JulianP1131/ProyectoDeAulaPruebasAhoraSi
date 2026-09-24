@@ -10,9 +10,9 @@
 </head>
 <body>
 <div class="app">
-#julian es gay 
+
   <aside class="barra-lateral">
-    <div>
+    <header>
       <div class="logo-app">
         <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
         <div>
@@ -29,8 +29,8 @@
         <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
         <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
       </nav>
-    </div>
-    <div class="pie-lateral">
+    </header>
+    <footer class="pie-lateral">
       <div class="tarjeta-usuario">
         <div style="display:flex; align-items:center; gap:10px;">
           <div class="avatar">CM</div>
@@ -42,7 +42,7 @@
         <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
       </div>
       <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
-    </div>
+    </footer>
   </aside>
 
   <main class="contenido">
@@ -64,8 +64,8 @@
       </div>
     </header>
 
-    <div class="zona-vistas">
-      <div class="tarjeta">
+    <section class="zona-vistas">
+      <article class="tarjeta">
 
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
           <div>
@@ -80,11 +80,11 @@
           <div class="rejilla-4" style="margin-bottom:0;">
             <div class="campo" style="margin-bottom:0;">
               <label for="f-nombre">Buscar por nombre</label>
-              <input type="text" id="f-nombre" placeholder="Ej. Gas, Supermercado...">
+              <input type="text" id="f-nombre" name="f-nombre" maxlength="60" placeholder="Ej. Gas, Supermercado...">
             </div>
             <div class="campo" style="margin-bottom:0;">
               <label for="f-categoria">Categoria</label>
-              <select id="f-categoria">
+              <select id="f-categoria" name="f-categoria">
                 <option>Todas las categorias</option>
                 <option>Servicios publicos</option>
                 <option>Mercado</option>
@@ -96,7 +96,7 @@
             </div>
             <div class="campo" style="margin-bottom:0;">
               <label for="f-medio">Medio de Pago</label>
-              <select id="f-medio">
+              <select id="f-medio" name="f-medio">
                 <option>Todos los medios</option>
                 <option>Tarjeta de credito</option>
                 <option>Tarjeta debito</option>
@@ -106,7 +106,7 @@
             </div>
             <div class="campo" style="margin-bottom:0;">
               <label for="f-periodo">Periodo</label>
-              <select id="f-periodo">
+              <select id="f-periodo" name="f-periodo">
                 <option>Todos los meses</option>
                 <option>Octubre 2024 (Actual)</option>
                 <option>Septiembre 2024</option>
@@ -133,8 +133,8 @@
             <tr><td>Canon de arriendo</td><td>Arriendo</td><td>01 Oct 2024</td><td>Transferencia Nequi</td><td style="text-align:right;">$1.300.000</td><td style="text-align:center;"><i class="fa-regular fa-eye" style="color:var(--gris-400);"></i></td></tr>
           </tbody>
         </table>
-      </div>
-    </div>
+      </article>
+    </section>
   </main>
 </div>
 </body>
