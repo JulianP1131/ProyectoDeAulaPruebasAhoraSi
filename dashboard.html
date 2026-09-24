@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - House Pay Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== MENU LATERAL ===== -->
+  <aside class="barra-lateral">
+    <header>
+      <div class="logo-app">
+        <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <div>
+          <h2>House Pay</h2>
+          <span>Hogar: Familia Morales</span>
+        </div>
+      </div>
+
+      <nav class="menu-principal">
+        <a href="dashboard.html" class="enlace-menu enlace-menu-activo"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+        <a href="gastos.html" class="enlace-menu"><i class="fa-solid fa-receipt"></i><span>Gastos y Movimientos</span></a>
+        <a href="registrar.html" class="enlace-menu"><i class="fa-solid fa-circle-plus"></i><span>Registrar Gasto</span></a>
+        <a href="medios.html" class="enlace-menu"><i class="fa-solid fa-credit-card"></i><span>Medios de Pago</span></a>
+        <a href="presupuestos.html" class="enlace-menu"><i class="fa-solid fa-chart-pie"></i><span>Presupuestos</span></a>
+        <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
+        <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
+      </nav>
+    </header>
+
+    <footer class="pie-lateral">
+      <div class="tarjeta-usuario">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="avatar">CM</div>
+          <div>
+            <p style="font-size:12px; font-weight:700;">Camila Morales</p>
+            <p style="font-size:10px; color:var(--gris-500);">Administrador</p>
+          </div>
+        </div>
+        <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+      </div>
+      <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
+    </footer>
+  </aside>
+
+  <!-- ===== CONTENIDO ===== -->
+  <main class="contenido">
+
+    <header class="topbar degradado-encabezado">
+      <div class="topbar-superior">
+        <div>
+          <h1>Dashboard del Hogar</h1>
+          <p>Resumen y control de gastos en tiempo real</p>
+        </div>
+        <div class="buscador">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Buscar servicio, arriendo o factura...">
+        </div>
+      </div>
+      <div class="fila-superior-acciones">
+        <a href="registrar.html" class="boton" style="background-color:#ffffff; color:var(--azul-600);">
+          <i class="fa-solid fa-plus"></i><span>Nuevo Gasto</span>
+        </a>
+        <a href="alertas.html" class="boton-campana"><i class="fa-solid fa-bell" style="color:#fff;"></i><span class="punto-aviso"></span></a>
+      </div>
+    </header>
+
+    <section class="zona-vistas">
+
+      <!-- Tres tarjetas resumen -->
+      <div class="rejilla-3">
+        <article class="tarjeta">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span class="etiqueta etiqueta-azul-suave">Presupuesto Disponible</span>
+            <i class="fa-solid fa-wallet" style="color:var(--azul-600);"></i>
+          </div>
+          <h3 style="font-size:28px; font-weight:800;">$1.267.900 <span class="texto-pequeno">COP</span></h3>
+          <p class="texto-pequeno mt-8">Saldo libre para lo que resta de mes</p>
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-top:16px; padding-top:12px; border-top:1px solid var(--gris-100);">
+            <span class="texto-pequeno">Limite mensual total:</span>
+            <span class="texto-negrita">$4.300.000 COP</span>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span class="etiqueta etiqueta-rosa">Total Gastado</span>
+            <i class="fa-solid fa-money-bill-transfer" style="color:var(--rosa-600);"></i>
+          </div>
+          <h3 style="font-size:28px; font-weight:800;">$3.032.100 <span class="texto-pequeno">COP</span></h3>
+          <p class="texto-pequeno mt-8">Acumulado en servicios y hogar</p>
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-top:16px; padding-top:12px; border-top:1px solid var(--gris-100);">
+            <span class="texto-pequeno">Promedio diario:</span>
+            <span class="texto-negrita">$101.070 COP / dia</span>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <span class="etiqueta etiqueta-ambar">Consumo Global</span>
+            <span style="font-size:12px; font-weight:700; color:var(--ambar-600);">71% ejecutado</span>
+          </div>
+          <div class="progreso-fondo" style="margin:14px 0;">
+            <div class="progreso-relleno progreso-ambar" style="width:71%;"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:12px;">
+            <span class="texto-verde texto-negrita"><i class="fa-solid fa-circle-check"></i> En rango seguro</span>
+            <a href="presupuestos.html" style="color:var(--azul-600); font-weight:700;">Ajustar meta →</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Dos columnas: proximos pagos / categorias -->
+      <div class="rejilla-2">
+
+        <article class="tarjeta">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h4 style="font-size:17px; font-weight:800;"><i class="fa-regular fa-calendar-check" style="color:var(--azul-600); margin-right:8px;"></i>Proximos Pagos</h4>
+            <a href="alertas.html" style="font-size:12px; font-weight:700; color:var(--azul-600);">Ver todas las alertas (2)</a>
+          </div>
+
+          <div class="fila-pago fila-pago-urgente">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="icono-pago" style="background-color:var(--ambar-500);"><i class="fa-solid fa-wifi"></i></div>
+              <div>
+                <h5 style="font-size:14px; font-weight:700;">Factura Internet Fibra Optica</h5>
+                <p style="font-size:12px; color:var(--ambar-700); font-weight:600;"><i class="fa-regular fa-clock"></i> Vence en 2 dias (18 Oct 2024)</p>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-weight:800;">$45.000</p>
+              <a href="alertas.html" class="boton boton-secundario boton-pequeno">Pagar ahora</a>
+            </div>
+          </div>
+
+          <div class="fila-pago fila-pago-normal">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="icono-pago" style="background-color:var(--azul-500);"><i class="fa-solid fa-bolt"></i></div>
+              <div>
+                <h5 style="font-size:14px; font-weight:700;">Energia y Gas Natural</h5>
+                <p class="texto-pequeno"><i class="fa-regular fa-clock"></i> Vence en 5 dias (22 Oct 2024)</p>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-weight:800;">$132.000</p>
+              <a href="alertas.html" class="boton boton-secundario boton-pequeno">Pagar ahora</a>
+            </div>
+          </div>
+
+          <div class="fila-pago fila-pago-normal">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="icono-pago" style="background-color:var(--indigo-500);"><i class="fa-solid fa-house"></i></div>
+              <div>
+                <h5 style="font-size:14px; font-weight:700;">Cuota Canon Arriendo</h5>
+                <p class="texto-pequeno"><i class="fa-regular fa-clock"></i> Vence en 14 dias (01 Nov 2024)</p>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-weight:800;">$650.000</p>
+              <a href="alertas.html" class="boton boton-secundario boton-pequeno">Pagar ahora</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tarjeta">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h4 style="font-size:17px; font-weight:800;"><i class="fa-solid fa-chart-column" style="color:var(--azul-600); margin-right:8px;"></i>Distribucion por Categoria</h4>
+            <a href="reportes.html" style="font-size:12px; font-weight:700; color:var(--azul-600);">Analitica completa →</a>
+          </div>
+
+          <div class="mb-16">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; margin-bottom:4px;">
+              <span><i class="fa-solid fa-house" style="color:var(--indigo-500);"></i> Arriendo</span>
+              <span>$1.300.000 <span class="texto-pequeno">/ $1.300.000</span></span>
+            </div>
+            <div class="progreso-fondo"><div class="progreso-relleno progreso-indigo" style="width:100%;"></div></div>
+          </div>
+
+          <div class="mb-16">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; margin-bottom:4px;">
+              <span><i class="fa-solid fa-cart-shopping" style="color:var(--verde-500);"></i> Mercado</span>
+              <span>$780.000 <span class="texto-pequeno">/ $1.200.000 (65%)</span></span>
+            </div>
+            <div class="progreso-fondo"><div class="progreso-relleno progreso-verde" style="width:65%;"></div></div>
+          </div>
+
+          <div class="mb-16">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; margin-bottom:4px;">
+              <span><i class="fa-solid fa-bolt" style="color:var(--azul-500);"></i> Servicios Publicos</span>
+              <span>$320.000 <span class="texto-pequeno">/ $400.000 (80%)</span></span>
+            </div>
+            <div class="progreso-fondo"><div class="progreso-relleno progreso-azul" style="width:80%;"></div></div>
+          </div>
+
+          <div class="mb-16">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; margin-bottom:4px;">
+              <span><i class="fa-solid fa-car" style="color:var(--ambar-500);"></i> Transporte</span>
+              <span>$215.000 <span class="texto-pequeno">/ $350.000 (61%)</span></span>
+            </div>
+            <div class="progreso-fondo"><div class="progreso-relleno progreso-ambar" style="width:61%;"></div></div>
+          </div>
+
+          <div class="mb-16">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:700; margin-bottom:4px;">
+              <span class="texto-rosa"><i class="fa-solid fa-triangle-exclamation"></i> Entretenimiento</span>
+              <span class="texto-rosa">$270.000 <span class="texto-pequeno">/ $250.000 (108%)</span></span>
+            </div>
+            <div class="progreso-fondo"><div class="progreso-relleno progreso-rosa" style="width:100%;"></div></div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-top:16px; padding-top:12px; border-top:1px solid var(--gris-100);">
+            <span class="texto-pequeno">6 categorias configuradas en este ciclo</span>
+            <a href="presupuestos.html" style="color:var(--azul-600); font-weight:700;">Gestionar presupuestos →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Ultimos movimientos -->
+      <article class="tarjeta">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <div>
+            <h4 style="font-size:17px; font-weight:800;">Ultimos Movimientos del Hogar</h4>
+            <p class="texto-pequeno">Desembolsos y pagos sincronizados recientemente</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <a href="gastos.html" class="boton boton-secundario boton-pequeno" style="background-color:#e0f2fe; color:var(--azul-600); border:none;">Ver todos los gastos (14)</a>
+            <a href="registrar.html" class="boton boton-primario boton-pequeno"><i class="fa-solid fa-plus"></i> Registrar Gasto</a>
+          </div>
+        </div>
+
+        <table class="tabla-simple">
+          <thead>
+            <tr><th>Gasto / Concepto</th><th>Categoria</th><th>Fecha</th><th>Medio de Pago</th><th style="text-align:right;">Valor</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Compra semanal Exito</td><td>Mercado</td><td>13 Oct 2024</td><td>Tarjeta debito ••3410</td><td style="text-align:right;">$185.000</td></tr>
+            <tr><td>Factura de Gas Natural</td><td>Servicios publicos</td><td>12 Oct 2024</td><td>Transferencia Nequi</td><td style="text-align:right;">$68.500</td></tr>
+            <tr><td>Suscripcion streaming</td><td>Entretenimiento</td><td>10 Oct 2024</td><td>Tarjeta credito ••9822</td><td style="text-align:right;">$32.900</td></tr>
+            <tr><td>Gasolina del carro</td><td>Transporte</td><td>09 Oct 2024</td><td>Efectivo Caja Chica</td><td style="text-align:right;">$60.000</td></tr>
+            <tr><td>Cuota curso de ingles</td><td>Educacion</td><td>07 Oct 2024</td><td>Tarjeta debito ••3410</td><td style="text-align:right;">$147.100</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+    </section>
+  </main>
+</div>
+</body>
+</html>

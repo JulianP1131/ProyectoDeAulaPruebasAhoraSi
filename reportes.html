@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportes - House Pay Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="barra-lateral">
+    <div>
+      <div class="logo-app">
+        <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <div>
+          <h2>House Pay</h2>
+          <span>Hogar: Familia Morales</span>
+        </div>
+      </div>
+      <nav class="menu-principal">
+        <a href="dashboard.html" class="enlace-menu"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+        <a href="gastos.html" class="enlace-menu"><i class="fa-solid fa-receipt"></i><span>Gastos y Movimientos</span></a>
+        <a href="registrar.html" class="enlace-menu"><i class="fa-solid fa-circle-plus"></i><span>Registrar Gasto</span></a>
+        <a href="medios.html" class="enlace-menu"><i class="fa-solid fa-credit-card"></i><span>Medios de Pago</span></a>
+        <a href="presupuestos.html" class="enlace-menu"><i class="fa-solid fa-chart-pie"></i><span>Presupuestos</span></a>
+        <a href="reportes.html" class="enlace-menu enlace-menu-activo"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
+        <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
+      </nav>
+    </div>
+    <div class="pie-lateral">
+      <div class="tarjeta-usuario">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="avatar">CM</div>
+          <div>
+            <p style="font-size:12px; font-weight:700;">Camila Morales</p>
+            <p style="font-size:10px; color:var(--gris-500);">Administrador</p>
+          </div>
+        </div>
+        <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+      </div>
+      <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <header class="topbar degradado-encabezado">
+      <div class="topbar-superior">
+        <div>
+          <h1>Analisis y Estadisticas del Hogar</h1>
+          <p>Patrones de consumo, comparativas y tendencias</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="zona-vistas">
+      <div class="tarjeta">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+          <div>
+            <h3 style="font-size:22px; font-weight:800;">Analisis y Estadisticas del Hogar</h3>
+            <p class="texto-pequeno">Visualiza patrones de consumo, comparativas mensuales y tendencias</p>
+          </div>
+          <span class="boton boton-secundario boton-pequeno"><i class="fa-regular fa-file-pdf" style="color:var(--rosa-500);"></i> Exportar PDF</span>
+        </div>
+
+        <div class="rejilla-2-3" style="display:grid; grid-template-columns:1fr; gap:24px; margin-bottom:32px;">
+
+          <div style="background-color:var(--gris-50); border:1px solid var(--gris-200); border-radius:16px; padding:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h4 style="font-size:14px; font-weight:700;">Evolucion de Gastos (Ultimos 4 Meses)</h4>
+              <span class="etiqueta etiqueta-azul-suave">Promedio: $3.150.000 / mes</span>
+            </div>
+
+            <div class="barras-meses">
+              <div class="barra-mes">
+                <span style="font-size:12px; font-weight:700;">$2.9M</span>
+                <div class="relleno" style="height:65%; background-color:#bae6fd;"></div>
+                <span class="texto-pequeno">Julio</span>
+              </div>
+              <div class="barra-mes">
+                <span style="font-size:12px; font-weight:700;">$3.4M</span>
+                <div class="relleno" style="height:78%; background-color:#7dd3fc;"></div>
+                <span class="texto-pequeno">Agosto</span>
+              </div>
+              <div class="barra-mes">
+                <span style="font-size:12px; font-weight:700;">$3.2M</span>
+                <div class="relleno" style="height:72%; background-color:#7dd3fc;"></div>
+                <span class="texto-pequeno">Septiembre</span>
+              </div>
+              <div class="barra-mes">
+                <span style="font-size:12px; font-weight:700; color:var(--azul-600);">$3.03M</span>
+                <div class="relleno" style="height:71%; background-color:var(--azul-500);"></div>
+                <span style="font-size:12px; font-weight:700; color:var(--azul-600);">Octubre</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:linear-gradient(135deg,#e0f2fe,#f0f9ff); border:1px solid #bae6fd; border-radius:16px; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div class="icono-redondo" style="background-color:var(--azul-500); color:#fff; margin-bottom:12px;"><i class="fa-solid fa-lightbulb"></i></div>
+              <h5 style="font-weight:800; margin-bottom:8px;">Consejo de Ahorro Domestico</h5>
+              <p style="font-size:13px; color:var(--gris-600); line-height:1.6;">Notamos que el rubro de <strong>Entretenimiento</strong> supero el limite fijado ($250.000 vs $270.000 gastados). Puedes equilibrarlo reasignando $20.000 COP desde el excedente favorable de <strong>Mercado</strong>.</p>
+            </div>
+            <a href="presupuestos.html" class="boton boton-primario" style="width:100%; margin-top:16px;">Equilibrar presupuestos</a>
+          </div>
+
+        </div>
+
+        <h4 style="font-size:14px; font-weight:700; margin-bottom:12px;">Participacion Porcentual de Gastos</h4>
+        <div class="rejilla-6">
+          <div style="background-color:var(--gris-50); border:1px solid var(--gris-200); border-radius:16px; padding:12px; text-align:center;">
+            <p class="texto-pequeno">Arriendo</p>
+            <p style="font-size:18px; font-weight:800; margin-top:4px;">42.8%</p>
+          </div>
+          <div style="background-color:var(--gris-50); border:1px solid var(--gris-200); border-radius:16px; padding:12px; text-align:center;">
+            <p class="texto-pequeno">Mercado</p>
+            <p style="font-size:18px; font-weight:800; margin-top:4px;">25.7%</p>
+          </div>
+          <div style="background-color:var(--gris-50); border:1px solid var(--gris-200); border-radius:16px; padding:12px; text-align:center;">
+            <p class="texto-pequeno">Servicios</p>
+            <p style="font-size:18px; font-weight:800; margin-top:4px;">10.5%</p>
+          </div>
+          <div style="background-color:var(--gris-50); border:1px solid var(--gris-200); border-radius:16px; padding:12px; text-align:center;">
+            <p class="texto-pequeno">Entretenimiento</p>
+            <p style="font-size:18px; font-weight:800; margin-top:4px; color:var(--rosa-600);">8.9%</p>
+          </div>
+          <div style="background-color:var(--gris-50); border:1px solid var(--gris-200); border-radius:16px; padding:12px; text-align:center;">
+            <p class="texto-pequeno">Transporte</p>
+            <p style="font-size:18px; font-weight:800; margin-top:4px;">7.1%</p>
+          </div>
+          <div style="background-color:var(--gris-50); border:1px solid var(--gris-200); border-radius:16px; padding:12px; text-align:center;">
+            <p class="texto-pequeno">Educacion</p>
+            <p style="font-size:18px; font-weight:800; margin-top:4px;">4.8%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

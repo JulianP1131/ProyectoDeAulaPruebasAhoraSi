@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Gasto - House Pay Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="barra-lateral">
+    <div>
+      <div class="logo-app">
+        <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <div>
+          <h2>House Pay</h2>
+          <span>Hogar: Familia Morales</span>
+        </div>
+      </div>
+      <nav class="menu-principal">
+        <a href="dashboard.html" class="enlace-menu"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+        <a href="gastos.html" class="enlace-menu"><i class="fa-solid fa-receipt"></i><span>Gastos y Movimientos</span></a>
+        <a href="registrar.html" class="enlace-menu enlace-menu-activo"><i class="fa-solid fa-circle-plus"></i><span>Registrar Gasto</span></a>
+        <a href="medios.html" class="enlace-menu"><i class="fa-solid fa-credit-card"></i><span>Medios de Pago</span></a>
+        <a href="presupuestos.html" class="enlace-menu"><i class="fa-solid fa-chart-pie"></i><span>Presupuestos</span></a>
+        <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
+        <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
+      </nav>
+    </div>
+    <div class="pie-lateral">
+      <div class="tarjeta-usuario">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="avatar">CM</div>
+          <div>
+            <p style="font-size:12px; font-weight:700;">Camila Morales</p>
+            <p style="font-size:10px; color:var(--gris-500);">Administrador</p>
+          </div>
+        </div>
+        <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+      </div>
+      <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <header class="topbar degradado-encabezado">
+      <div class="topbar-superior">
+        <div>
+          <h1>Registrar Nuevo Gasto</h1>
+          <p>Agrega un pago de servicio, compra o compromiso familiar</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="zona-vistas" style="max-width:700px;">
+      <div class="tarjeta">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--gris-100);">
+          <div class="icono-redondo" style="background-color:var(--azul-500); color:#fff;"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+          <div>
+            <h3 style="font-size:20px; font-weight:800;">Registrar Nuevo Gasto</h3>
+            <p class="texto-pequeno">Completa los datos y guarda el movimiento</p>
+          </div>
+        </div>
+
+        <!-- Este formulario no envia datos a ningun lado, es solo la interfaz -->
+        <form class="formulario">
+
+          <div class="campo">
+            <label for="g-nombre">Nombre o Descripcion del Gasto *</label>
+            <input type="text" id="g-nombre" required placeholder="Ej. Servicio de gas, Compra semanal Exito, Cuota colegio...">
+          </div>
+
+          <div class="campo-doble mb-16">
+            <div class="campo" style="margin-bottom:0;">
+              <label for="g-valor">Valor (COP) *</label>
+              <input type="number" id="g-valor" required min="100" placeholder="Ej. 85000">
+              <div style="display:flex; gap:8px; margin-top:8px;">
+                <span class="etiqueta etiqueta-gris">+20k</span>
+                <span class="etiqueta etiqueta-gris">+50k</span>
+                <span class="etiqueta etiqueta-gris">+100k</span>
+              </div>
+            </div>
+            <div class="campo" style="margin-bottom:0;">
+              <label for="g-categoria">Categoria del Hogar *</label>
+              <select id="g-categoria" required>
+                <option value="" selected disabled>Selecciona categoria...</option>
+                <option>Servicios publicos</option>
+                <option>Mercado</option>
+                <option>Arriendo</option>
+                <option>Transporte</option>
+                <option>Educacion</option>
+                <option>Entretenimiento</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="campo-doble mb-16">
+            <div class="campo" style="margin-bottom:0;">
+              <label for="g-fecha">Fecha de Pago *</label>
+              <input type="date" id="g-fecha" required>
+            </div>
+            <div class="campo" style="margin-bottom:0;">
+              <label for="g-vencimiento">Fecha de Vencimiento (Opcional)</label>
+              <input type="date" id="g-vencimiento">
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="g-medio">Medio de Pago Utilizado (Obligatorio) *</label>
+            <select id="g-medio" required>
+              <option value="" selected disabled>Selecciona medio de pago registrado...</option>
+              <option>Tarjeta debito Bancolombia (••3410)</option>
+              <option>Tarjeta de credito Visa Hogar (••9822)</option>
+              <option>Transferencia bancaria / Nequi</option>
+              <option>Efectivo en Caja Chica Hogar</option>
+            </select>
+            <p class="texto-pequeno mt-8">Solo se permiten medios previamente configurados en el hogar.</p>
+          </div>
+
+          <div class="formulario-acciones">
+            <a href="gastos.html" class="boton boton-secundario">Cancelar</a>
+            <button type="submit" class="boton boton-primario"><i class="fa-solid fa-check"></i><span>Guardar y Actualizar Saldos</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

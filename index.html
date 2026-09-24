@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesion - House Pay Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <main class="pantalla-acceso">
+
+    <section class="panel-visual degradado-encabezado">
+      <header class="marca">
+        <span class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></span>
+        <span style="font-size:22px; font-weight:800;">House Pay Assistant</span>
+      </header>
+
+      <div>
+        <h1>Finanzas familiares en armonia, claras y sin complicaciones.</h1>
+        <p>Controla arriendos, servicios, compras del mes y presupuestos con una interfaz limpia y pensada para la tranquilidad de tu hogar.</p>
+
+        <article class="tarjeta-flotante">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="icono-redondo" style="width:40px; height:40px; background-color: rgba(16,185,129,0.2); color:#6ee7b7;">
+                <i class="fa-solid fa-piggy-bank"></i>
+              </div>
+              <div>
+                <p style="font-size:12px; color:#e0f2fe;">Presupuesto del mes</p>
+                <p style="font-size:20px; font-weight:700;">$1.267.900 COP <span style="font-size:12px; font-weight:400;">disponibles</span></p>
+              </div>
+            </div>
+            <span class="etiqueta" style="background-color: rgba(16,185,129,0.3); color:#a7f3d0;">Al dia</span>
+          </div>
+          <div class="progreso-fondo" style="background-color: rgba(255,255,255,0.2);">
+            <div class="progreso-relleno" style="width:71%; background-color:#ffffff;"></div>
+          </div>
+          <p style="font-size:11px; color:#e0f2fe; text-align:right; margin-top:8px;">71% cupo ejecutado</p>
+        </article>
+      </div>
+
+      <footer class="pie-panel-visual">
+        <span>© 2025 House Pay Assistant. Disenado para familias.</span>
+        <span>Privacidad</span>
+      </footer>
+    </section>
+
+    <!-- Lado derecho, formulario -->
+    <section class="panel-formulario">
+      <div class="caja-formulario">
+
+        <nav class="selector-pestanas">
+          <a href="index.html" class="pestana pestana-activa" style="display:block;">Iniciar Sesion</a>
+          <a href="registro.html" class="pestana" style="display:block;">Crear Cuenta</a>
+        </nav>
+
+        <h2 style="font-size:24px; font-weight:800; margin-bottom:4px;">¡Bienvenido de nuevo!</h2>
+        <p class="texto-pequeno mb-24">Ingresa las credenciales del hogar para acceder a tu panel.</p>
+
+        <form action="dashboard.html" method="get">
+          <div class="campo">
+            <label for="correo">Correo electronico o usuario</label>
+            <input type="text" id="correo" value="familia.morales@housepay.co">
+          </div>
+
+          <div class="campo">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <label style="margin-bottom:0;" for="clave">Contrasena</label>
+              <a href="mailto:soporte@housepay.co" style="font-size:12px; color:var(--azul-600); font-weight:700;">¿Olvidaste tu contrasena?</a>
+            </div>
+            <input type="password" id="clave" value="12345678">
+          </div>
+
+          <button type="submit" class="boton boton-primario" style="width:100%; margin-top:8px;">
+            <span>Iniciar Sesion en el Hogar</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <div class="enlace-separador"><span>o acceso rapido de demostracion</span></div>
+
+        <a href="dashboard.html" class="boton boton-secundario" style="width:100%;">
+          <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--azul-500);"></i>
+          <span>Entrar como Demo: Hogar Familia Morales</span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

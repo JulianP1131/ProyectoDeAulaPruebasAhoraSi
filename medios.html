@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medios de Pago - House Pay Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="barra-lateral">
+    <div>
+      <div class="logo-app">
+        <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <div>
+          <h2>House Pay</h2>
+          <span>Hogar: Familia Morales</span>
+        </div>
+      </div>
+      <nav class="menu-principal">
+        <a href="dashboard.html" class="enlace-menu"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+        <a href="gastos.html" class="enlace-menu"><i class="fa-solid fa-receipt"></i><span>Gastos y Movimientos</span></a>
+        <a href="registrar.html" class="enlace-menu"><i class="fa-solid fa-circle-plus"></i><span>Registrar Gasto</span></a>
+        <a href="medios.html" class="enlace-menu enlace-menu-activo"><i class="fa-solid fa-credit-card"></i><span>Medios de Pago</span></a>
+        <a href="presupuestos.html" class="enlace-menu"><i class="fa-solid fa-chart-pie"></i><span>Presupuestos</span></a>
+        <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
+        <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
+      </nav>
+    </div>
+    <div class="pie-lateral">
+      <div class="tarjeta-usuario">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="avatar">CM</div>
+          <div>
+            <p style="font-size:12px; font-weight:700;">Camila Morales</p>
+            <p style="font-size:10px; color:var(--gris-500);">Administrador</p>
+          </div>
+        </div>
+        <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+      </div>
+      <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <header class="topbar degradado-encabezado">
+      <div class="topbar-superior">
+        <div>
+          <h1>Medios de Pago del Hogar</h1>
+          <p>Administra tus tarjetas compartidas, cuentas y caja chica</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="zona-vistas">
+      <div class="tarjeta">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+          <div>
+            <h3 style="font-size:22px; font-weight:800;">Medios de Pago del Hogar</h3>
+            <p class="texto-pequeno">Administra tus tarjetas compartidas, cuentas bancarias y caja chica de efectivo</p>
+          </div>
+          <!-- Este enlace abre el modal usando el truco de :target, sin nada de JavaScript -->
+          <a href="#modal-medio-pago" class="boton boton-primario"><i class="fa-solid fa-plus"></i><span>Agregar Medio de Pago</span></a>
+        </div>
+
+        <div class="rejilla-4">
+
+          <div class="tarjeta-banco banco-negra">
+            <div style="display:flex; justify-content:space-between;">
+              <span style="font-size:12px; color:#cbd5e1;">Tarjeta Debito</span>
+              <i class="fa-solid fa-building-columns" style="color:#94a3b8;"></i>
+            </div>
+            <div>
+              <p style="font-size:11px; color:#94a3b8; font-family:monospace;">CUENTA CORRIENTE FAMILIAR</p>
+              <p class="numero">•••• •••• •••• 3410</p>
+            </div>
+            <div class="fila-final">
+              <div>
+                <p style="font-size:10px; color:#94a3b8;">Titular</p>
+                <p style="font-size:12px; font-weight:700;">Familia Morales</p>
+              </div>
+              <span class="etiqueta" style="background-color:rgba(14,165,233,0.2); color:#7dd3fc;">Principal</span>
+            </div>
+          </div>
+
+          <div class="tarjeta-banco banco-azul">
+            <div style="display:flex; justify-content:space-between;">
+              <span style="font-size:12px;">Tarjeta de Credito</span>
+              <i class="fa-brands fa-cc-visa" style="font-size:22px;"></i>
+            </div>
+            <div>
+              <p style="font-size:11px; font-family:monospace;">VISA HOGAR COMPARTIDA</p>
+              <p class="numero">•••• •••• •••• 9822</p>
+            </div>
+            <div class="fila-final">
+              <div>
+                <p style="font-size:10px;">Cupo Disponible</p>
+                <p style="font-size:12px; font-weight:700;">$2.500.000 COP</p>
+              </div>
+              <span class="etiqueta" style="background-color:rgba(255,255,255,0.2);">Activa</span>
+            </div>
+          </div>
+
+          <div class="tarjeta-banco banco-morada">
+            <div style="display:flex; justify-content:space-between;">
+              <span style="font-size:12px;">Transferencia Bancaria</span>
+              <i class="fa-solid fa-mobile-screen-button"></i>
+            </div>
+            <div>
+              <p style="font-size:11px; font-family:monospace;">NEQUI / DAVIPLATA HOGAR</p>
+              <p class="numero">315 ••• 4482</p>
+            </div>
+            <div class="fila-final">
+              <div>
+                <p style="font-size:10px;">Tipo</p>
+                <p style="font-size:12px; font-weight:700;">Pagos Instantaneos</p>
+              </div>
+              <span class="etiqueta" style="background-color:rgba(255,255,255,0.2);">Sincronizado</span>
+            </div>
+          </div>
+
+          <div class="tarjeta-banco banco-verde">
+            <div style="display:flex; justify-content:space-between;">
+              <span style="font-size:12px;">Efectivo Fisico</span>
+              <i class="fa-solid fa-money-bill-1-wave"></i>
+            </div>
+            <div>
+              <p style="font-size:11px; font-family:monospace;">GAVETA DE SALON</p>
+              <p style="font-size:22px; font-weight:800;">$150.000 <span style="font-size:12px; font-weight:400;">COP</span></p>
+            </div>
+            <div class="fila-final">
+              <div>
+                <p style="font-size:10px;">Ultimo arqueo</p>
+                <p style="font-size:12px; font-weight:700;">Ayer 14 Oct</p>
+              </div>
+              <span class="etiqueta" style="background-color:rgba(255,255,255,0.2);">En casa</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="aviso-info">
+          <div class="icono-redondo"><i class="fa-solid fa-shield-halved"></i></div>
+          <p><strong>Proteccion de Privacidad Familiar:</strong> House Pay Assistant nunca almacena CVV, claves bancarias ni datos confidenciales completos. Solo registramos identificadores seguros para asociar quien pago cada factura.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ===== VENTANA MODAL PARA AGREGAR MEDIO DE PAGO =====
+     Se muestra sola gracias al selector :target en el CSS,
+     cuando la direccion termina en #modal-medio-pago -->
+<div id="modal-medio-pago" class="fondo-modal">
+  <div class="caja-modal">
+    <div class="cabecera-modal">
+      <h4 style="font-weight:800; font-size:18px;">Agregar Medio de Pago</h4>
+      <a href="medios.html" class="boton-cerrar-modal"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+
+    <form class="formulario">
+      <div class="campo">
+        <label for="m-tipo">Tipo de Medio</label>
+        <select id="m-tipo">
+          <option>Tarjeta de credito</option>
+          <option>Tarjeta debito</option>
+          <option>Transferencia bancaria / Nequi</option>
+          <option>Efectivo</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label for="m-nombre">Nombre Identificativo</label>
+        <input type="text" id="m-nombre" placeholder="Ej. Visa Hogar, Cuenta Ahorros...">
+      </div>
+      <div class="campo">
+        <label for="m-digitos">Ultimos 4 Digitos (Ficticios)</label>
+        <input type="text" id="m-digitos" maxlength="4" placeholder="Ej. 8841">
+      </div>
+      <div class="formulario-acciones">
+        <a href="medios.html" class="boton boton-secundario">Cancelar</a>
+        <button type="submit" class="boton boton-primario">Guardar Medio</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

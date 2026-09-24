@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gastos - House Pay Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="barra-lateral">
+    <div>
+      <div class="logo-app">
+        <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <div>
+          <h2>House Pay</h2>
+          <span>Hogar: Familia Morales</span>
+        </div>
+      </div>
+      <nav class="menu-principal">
+        <a href="dashboard.html" class="enlace-menu"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+        <a href="gastos.html" class="enlace-menu enlace-menu-activo"><i class="fa-solid fa-receipt"></i><span>Gastos y Movimientos</span></a>
+        <a href="registrar.html" class="enlace-menu"><i class="fa-solid fa-circle-plus"></i><span>Registrar Gasto</span></a>
+        <a href="medios.html" class="enlace-menu"><i class="fa-solid fa-credit-card"></i><span>Medios de Pago</span></a>
+        <a href="presupuestos.html" class="enlace-menu"><i class="fa-solid fa-chart-pie"></i><span>Presupuestos</span></a>
+        <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
+        <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
+      </nav>
+    </div>
+    <div class="pie-lateral">
+      <div class="tarjeta-usuario">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="avatar">CM</div>
+          <div>
+            <p style="font-size:12px; font-weight:700;">Camila Morales</p>
+            <p style="font-size:10px; color:var(--gris-500);">Administrador</p>
+          </div>
+        </div>
+        <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+      </div>
+      <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <header class="topbar degradado-encabezado">
+      <div class="topbar-superior">
+        <div>
+          <h1>Historial Completo de Gastos</h1>
+          <p>Consulta, filtra y categoriza cada desembolso familiar</p>
+        </div>
+        <div class="buscador">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Buscar servicio, arriendo o factura...">
+        </div>
+      </div>
+      <div class="fila-superior-acciones">
+        <a href="registrar.html" class="boton" style="background-color:#ffffff; color:var(--azul-600);">
+          <i class="fa-solid fa-plus"></i><span>Nuevo Gasto</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="zona-vistas">
+      <div class="tarjeta">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <div>
+            <h3 style="font-size:22px; font-weight:800;">Historial Completo de Gastos</h3>
+            <p class="texto-pequeno">14 movimientos registrados este ciclo</p>
+          </div>
+          <a href="registrar.html" class="boton boton-primario"><i class="fa-solid fa-plus"></i><span>Registrar Nuevo Gasto</span></a>
+        </div>
+
+        <!-- Filtros: es un formulario normal, no hace nada porque no hay backend -->
+        <form style="background-color:var(--gris-50); padding:16px; border-radius:16px; border:1px solid var(--gris-200); margin-bottom:24px;">
+          <div class="rejilla-4" style="margin-bottom:0;">
+            <div class="campo" style="margin-bottom:0;">
+              <label for="f-nombre">Buscar por nombre</label>
+              <input type="text" id="f-nombre" placeholder="Ej. Gas, Supermercado...">
+            </div>
+            <div class="campo" style="margin-bottom:0;">
+              <label for="f-categoria">Categoria</label>
+              <select id="f-categoria">
+                <option>Todas las categorias</option>
+                <option>Servicios publicos</option>
+                <option>Mercado</option>
+                <option>Arriendo</option>
+                <option>Transporte</option>
+                <option>Educacion</option>
+                <option>Entretenimiento</option>
+              </select>
+            </div>
+            <div class="campo" style="margin-bottom:0;">
+              <label for="f-medio">Medio de Pago</label>
+              <select id="f-medio">
+                <option>Todos los medios</option>
+                <option>Tarjeta de credito</option>
+                <option>Tarjeta debito</option>
+                <option>Efectivo</option>
+                <option>Transferencia bancaria</option>
+              </select>
+            </div>
+            <div class="campo" style="margin-bottom:0;">
+              <label for="f-periodo">Periodo</label>
+              <select id="f-periodo">
+                <option>Todos los meses</option>
+                <option>Octubre 2024 (Actual)</option>
+                <option>Septiembre 2024</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; font-size:12px;">
+            <span class="texto-pequeno">Mostrando 10 de 14 registros</span>
+            <a href="gastos.html" style="color:var(--azul-600); font-weight:700;"><i class="fa-solid fa-arrow-rotate-left"></i> Limpiar filtros</a>
+          </div>
+        </form>
+
+        <table class="tabla-simple">
+          <thead>
+            <tr><th>Gasto / Descripcion</th><th>Categoria</th><th>Fecha</th><th>Medio de Pago</th><th style="text-align:right;">Valor COP</th><th style="text-align:center;">Accion</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Compra semanal Exito</td><td>Mercado</td><td>13 Oct 2024</td><td>Tarjeta debito ••3410</td><td style="text-align:right;">$185.000</td><td style="text-align:center;"><i class="fa-regular fa-eye" style="color:var(--gris-400);"></i></td></tr>
+            <tr><td>Factura de Gas Natural</td><td>Servicios publicos</td><td>12 Oct 2024</td><td>Transferencia Nequi</td><td style="text-align:right;">$68.500</td><td style="text-align:center;"><i class="fa-regular fa-eye" style="color:var(--gris-400);"></i></td></tr>
+            <tr><td>Suscripcion streaming</td><td>Entretenimiento</td><td>10 Oct 2024</td><td>Tarjeta credito ••9822</td><td style="text-align:right;">$32.900</td><td style="text-align:center;"><i class="fa-regular fa-eye" style="color:var(--gris-400);"></i></td></tr>
+            <tr><td>Gasolina del carro</td><td>Transporte</td><td>09 Oct 2024</td><td>Efectivo Caja Chica</td><td style="text-align:right;">$60.000</td><td style="text-align:center;"><i class="fa-regular fa-eye" style="color:var(--gris-400);"></i></td></tr>
+            <tr><td>Cuota curso de ingles</td><td>Educacion</td><td>07 Oct 2024</td><td>Tarjeta debito ••3410</td><td style="text-align:right;">$147.100</td><td style="text-align:center;"><i class="fa-regular fa-eye" style="color:var(--gris-400);"></i></td></tr>
+            <tr><td>Cine en familia</td><td>Entretenimiento</td><td>05 Oct 2024</td><td>Tarjeta credito ••9822</td><td style="text-align:right;">$95.000</td><td style="text-align:center;"><i class="fa-regular fa-eye" style="color:var(--gris-400);"></i></td></tr>
+            <tr><td>Canon de arriendo</td><td>Arriendo</td><td>01 Oct 2024</td><td>Transferencia Nequi</td><td style="text-align:right;">$1.300.000</td><td style="text-align:center;"><i class="fa-regular fa-eye" style="color:var(--gris-400);"></i></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

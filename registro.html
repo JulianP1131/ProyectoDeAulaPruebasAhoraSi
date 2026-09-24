@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Cuenta - House Pay Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="pantalla-acceso">
+
+    <aside class="panel-visual degradado-encabezado">
+      <div class="marca">
+        <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <span style="font-size:22px; font-weight:800;">House Pay Assistant</span>
+      </div>
+
+      <div>
+        <h1>Finanzas familiares en armonia, claras y sin complicaciones.</h1>
+        <p>Controla arriendos, servicios, compras del mes y presupuestos con una interfaz limpia y pensada para la tranquilidad de tu hogar.</p>
+
+        <article class="tarjeta-flotante">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="icono-redondo" style="width:40px; height:40px; background-color: rgba(16,185,129,0.2); color:#6ee7b7;">
+                <i class="fa-solid fa-piggy-bank"></i>
+              </div>
+              <div>
+                <p style="font-size:12px; color:#e0f2fe;">Presupuesto del mes</p>
+                <p style="font-size:20px; font-weight:700;">$1.267.900 COP <span style="font-size:12px; font-weight:400;">disponibles</span></p>
+              </div>
+            </div>
+            <span class="etiqueta" style="background-color: rgba(16,185,129,0.3); color:#a7f3d0;">Al dia</span>
+          </div>
+          <div class="progreso-fondo" style="background-color: rgba(255,255,255,0.2);">
+            <div class="progreso-relleno" style="width:71%; background-color:#ffffff;"></div>
+          </div>
+          <p style="font-size:11px; color:#e0f2fe; text-align:right; margin-top:8px;">71% cupo ejecutado</p>
+        </article>
+      </div>
+
+      <footer class="pie-panel-visual">
+        <span>© 2025 House Pay Assistant. Disenado para familias.</span>
+        <span>Privacidad</span>
+      </footer>
+    </aside>
+
+    <main class="panel-formulario">
+      <section class="caja-formulario">
+
+        <nav class="selector-pestanas">
+          <a href="index.html" class="pestana" style="display:block;">Iniciar Sesion</a>
+          <a href="registro.html" class="pestana pestana-activa" style="display:block;">Crear Cuenta</a>
+        </nav>
+
+        <h2 style="font-size:24px; font-weight:800; margin-bottom:4px;">Registra tu Hogar</h2>
+        <p class="texto-pequeno mb-24">Empieza a organizar las cuentas y gastos en menos de 2 minutos.</p>
+
+        <form action="dashboard.html" method="get">
+          <div class="campo">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required minlength="3" maxlength="60" autocomplete="name" placeholder="Ej. Camila Morales">
+          </div>
+
+          <div class="campo">
+            <label for="correo2">Correo electronico</label>
+            <input type="email" id="correo2" name="correo2" required autocomplete="email" placeholder="nombre@hogar.com">
+          </div>
+
+          <div class="formulario campo-doble mb-16">
+            <div class="campo" style="margin-bottom:0;">
+              <label for="clave1">Contrasena</label>
+              <input type="password" id="clave1" name="clave1" required minlength="8" autocomplete="new-password" placeholder="Minimo 8 caracteres">
+            </div>
+            <div class="campo" style="margin-bottom:0;">
+              <label for="clave2">Confirmar</label>
+              <input type="password" id="clave2" name="clave2" required minlength="8" autocomplete="new-password" placeholder="Repite contrasena">
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:20px;">
+            <input type="checkbox" id="terminos" name="terminos" required>
+            <label for="terminos" style="font-size:12px; color:var(--gris-600);">Acepto administrar los presupuestos con respeto familiar.</label>
+          </div>
+
+          <button type="submit" class="boton boton-primario" style="width:100%;">
+            <span>Crear Cuenta y Abrir Panel</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+      </section>
+    </main>
+
+  </div>
+
+</body>
+</html>

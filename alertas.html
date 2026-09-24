@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alertas - House Pay Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="barra-lateral">
+    <div>
+      <div class="logo-app">
+        <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
+        <div>
+          <h2>House Pay</h2>
+          <span>Hogar: Familia Morales</span>
+        </div>
+      </div>
+      <nav class="menu-principal">
+        <a href="dashboard.html" class="enlace-menu"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+        <a href="gastos.html" class="enlace-menu"><i class="fa-solid fa-receipt"></i><span>Gastos y Movimientos</span></a>
+        <a href="registrar.html" class="enlace-menu"><i class="fa-solid fa-circle-plus"></i><span>Registrar Gasto</span></a>
+        <a href="medios.html" class="enlace-menu"><i class="fa-solid fa-credit-card"></i><span>Medios de Pago</span></a>
+        <a href="presupuestos.html" class="enlace-menu"><i class="fa-solid fa-chart-pie"></i><span>Presupuestos</span></a>
+        <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
+        <a href="alertas.html" class="enlace-menu enlace-menu-activo"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
+      </nav>
+    </div>
+    <div class="pie-lateral">
+      <div class="tarjeta-usuario">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="avatar">CM</div>
+          <div>
+            <p style="font-size:12px; font-weight:700;">Camila Morales</p>
+            <p style="font-size:10px; color:var(--gris-500);">Administrador</p>
+          </div>
+        </div>
+        <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+      </div>
+      <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <header class="topbar degradado-encabezado">
+      <div class="topbar-superior">
+        <div>
+          <h1>Centro de Alertas Financieras</h1>
+          <p>Notificaciones de proximidad de pago y limites de presupuesto</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="zona-vistas">
+      <div class="tarjeta">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+          <div>
+            <h3 style="font-size:22px; font-weight:800;">Centro de Alertas Financieras</h3>
+            <p class="texto-pequeno">Notificaciones de proximidad de pago y limites de presupuesto</p>
+          </div>
+          <span class="etiqueta etiqueta-ambar">2 alertas activas</span>
+        </div>
+
+        <!-- Alerta 1 -->
+        <div class="fila-pago fila-pago-urgente">
+          <div style="display:flex; align-items:flex-start; gap:12px;">
+            <div class="icono-pago" style="background-color:var(--ambar-500); flex-shrink:0;"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <span class="etiqueta" style="background-color:var(--ambar-200); color:var(--ambar-800);">Vencimiento cercano</span>
+              <h5 style="font-size:15px; font-weight:700; margin-top:6px;">Factura Internet Fibra Optica</h5>
+              <p class="texto-pequeno mt-8">Fecha limite: <strong>18 de Octubre (2 dias restantes)</strong>. Monto: <strong>$45.000 COP</strong></p>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="gastos.html" class="boton boton-pequeno" style="background-color:var(--ambar-500); color:#fff;">Pagar Factura</a>
+            <a href="gastos.html" class="boton boton-secundario boton-pequeno">Ver en Gastos</a>
+          </div>
+        </div>
+
+        <!-- Alerta 2 -->
+        <div class="fila-pago" style="background-color:var(--rosa-50); border:1px solid var(--rosa-200);">
+          <div style="display:flex; align-items:flex-start; gap:12px;">
+            <div class="icono-pago" style="background-color:var(--rosa-500); flex-shrink:0;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+              <span class="etiqueta" style="background-color:var(--rosa-200); color:var(--rosa-800);">Presupuesto superado</span>
+              <h5 style="font-size:15px; font-weight:700; margin-top:6px;">Rubro de Entretenimiento al 108%</h5>
+              <p class="texto-pequeno mt-8">Limite fijado: <strong>$250.000 COP</strong> · Gastado actual: <strong class="texto-rosa">$270.000 COP</strong> (+ $20.000)</p>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <a href="presupuestos.html" class="boton boton-pequeno" style="background-color:var(--rosa-500); color:#fff;">Modificar Limite</a>
+            <a href="gastos.html" class="boton boton-secundario boton-pequeno">Revisar Gastos</a>
+          </div>
+        </div>
+
+        <!-- Notificacion positivo -->
+        <div class="fila-pago" style="background-color:var(--verde-50); border:1px solid var(--verde-200); margin-bottom:0;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="icono-pago" style="background-color:var(--verde-500);"><i class="fa-solid fa-shield-check"></i></div>
+            <div>
+              <h5 style="font-size:14px; font-weight:700; color:var(--verde-900);">Servicio de Arriendo al dia</h5>
+              <p style="font-size:12px; color:var(--verde-700);">El pago del canon mensual por $1.300.000 COP fue liquidado sin mora.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
