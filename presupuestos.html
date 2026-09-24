@@ -12,7 +12,7 @@
 <div class="app">
 
   <aside class="barra-lateral">
-    <div>
+    <header>
       <div class="logo-app">
         <div class="icono-redondo"><i class="fa-solid fa-house-chimney-user"></i></div>
         <div>
@@ -29,8 +29,8 @@
         <a href="reportes.html" class="enlace-menu"><i class="fa-solid fa-chart-simple"></i><span>Reportes y Estadisticas</span></a>
         <a href="alertas.html" class="enlace-menu"><i class="fa-solid fa-bell"></i><span>Centro de Alertas</span><span class="globo-aviso">2</span></a>
       </nav>
-    </div>
-    <div class="pie-lateral">
+    </header>
+    <footer class="pie-lateral">
       <div class="tarjeta-usuario">
         <div style="display:flex; align-items:center; gap:10px;">
           <div class="avatar">CM</div>
@@ -42,7 +42,7 @@
         <a href="index.html" title="Cerrar sesion" style="color:var(--gris-400);"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
       </div>
       <p class="marca-agua">House Pay v2.4 · Hogar Conectado</p>
-    </div>
+    </footer>
   </aside>
 
   <main class="contenido">
@@ -55,8 +55,8 @@
       </div>
     </header>
 
-    <div class="zona-vistas">
-      <div class="tarjeta">
+    <section class="zona-vistas">
+      <article class="tarjeta">
 
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
           <div>
@@ -82,7 +82,7 @@
 
         <div class="rejilla-3">
 
-          <div class="tarjeta" style="border-color:var(--gris-200);">
+          <article class="tarjeta" style="border-color:var(--gris-200);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
               <span style="font-weight:700;"><i class="fa-solid fa-house" style="color:var(--indigo-500); margin-right:6px;"></i>Arriendo</span>
               <span class="etiqueta etiqueta-gris">100% gastado</span>
@@ -93,9 +93,9 @@
               <span>Cupo: <strong>$1.300.000</strong></span>
             </div>
             <p class="texto-pequeno mt-8">Cubierto en su totalidad a inicio de mes.</p>
-          </div>
+          </article>
 
-          <div class="tarjeta" style="border-color:var(--gris-200);">
+          <article class="tarjeta" style="border-color:var(--gris-200);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
               <span style="font-weight:700;"><i class="fa-solid fa-cart-shopping" style="color:var(--verde-500); margin-right:6px;"></i>Mercado y Despensa</span>
               <span class="etiqueta etiqueta-verde">65% gastado</span>
@@ -106,9 +106,9 @@
               <span>Cupo: <strong>$1.200.000</strong></span>
             </div>
             <p class="texto-verde mt-8" style="font-size:12px; font-weight:600;">Quedan $420.000 COP disponibles.</p>
-          </div>
+          </article>
 
-          <div class="tarjeta" style="border-color:var(--gris-200);">
+          <article class="tarjeta" style="border-color:var(--gris-200);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
               <span style="font-weight:700;"><i class="fa-solid fa-bolt" style="color:var(--azul-500); margin-right:6px;"></i>Servicios Publicos</span>
               <span class="etiqueta etiqueta-azul-suave">80% gastado</span>
@@ -119,9 +119,9 @@
               <span>Cupo: <strong>$400.000</strong></span>
             </div>
             <p class="texto-pequeno mt-8">Quedan $80.000 COP para gas pendiente.</p>
-          </div>
+          </article>
 
-          <div class="tarjeta" style="border-color:var(--gris-200);">
+          <article class="tarjeta" style="border-color:var(--gris-200);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
               <span style="font-weight:700;"><i class="fa-solid fa-car" style="color:var(--ambar-500); margin-right:6px;"></i>Transporte y Gasolina</span>
               <span class="etiqueta etiqueta-ambar">61% gastado</span>
@@ -132,9 +132,9 @@
               <span>Cupo: <strong>$350.000</strong></span>
             </div>
             <p class="texto-pequeno mt-8">Dentro de la meta prevista.</p>
-          </div>
+          </article>
 
-          <div class="tarjeta" style="border-color:var(--gris-200);">
+          <article class="tarjeta" style="border-color:var(--gris-200);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
               <span style="font-weight:700;"><i class="fa-solid fa-graduation-cap" style="color:var(--morado-500); margin-right:6px;"></i>Educacion y Cursos</span>
               <span class="etiqueta" style="background-color:var(--morado-100); color:var(--morado-700);">47% gastado</span>
@@ -145,9 +145,9 @@
               <span>Cupo: <strong>$310.000</strong></span>
             </div>
             <p class="texto-verde mt-8" style="font-size:12px; font-weight:600;">Holgura de $162.900 COP.</p>
-          </div>
+          </article>
 
-          <div class="tarjeta" style="border:2px solid var(--rosa-200); background-color:#fff1f2;">
+          <article class="tarjeta" style="border:2px solid var(--rosa-200); background-color:#fff1f2;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
               <span style="font-weight:700; color:var(--rosa-800);"><i class="fa-solid fa-gamepad" style="margin-right:6px;"></i>Entretenimiento</span>
               <span class="etiqueta etiqueta-rosa"><i class="fa-solid fa-triangle-exclamation"></i> 108% Excedido</span>
@@ -158,11 +158,11 @@
               <span>Cupo: $250.000</span>
             </div>
             <p style="font-size:12px; color:var(--rosa-600); font-weight:700; margin-top:8px;">¡Atencion! Has sobrepasado este rubro por $20.000 COP.</p>
-          </div>
+          </article>
 
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   </main>
 </div>
 </body>

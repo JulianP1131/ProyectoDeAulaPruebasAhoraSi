@@ -79,7 +79,9 @@ img {
   --morado-800: #6b21a8;
 }
 
-/* COSAS QUE SE REPITEN EN VARIAS PANTALLAS */
+/* =========================================================
+   COSAS QUE SE REPITEN EN VARIAS PANTALLAS
+========================================================= */
 
 .degradado-encabezado {
   background: linear-gradient(135deg, var(--azul-500) 0%, var(--verdeazul-500) 100%);
