@@ -1,27 +1,7 @@
-/* =====================================================================
-   House Pay Assistant - logica de la aplicacion
-   ---------------------------------------------------------------------
-   Sin base de datos: todo se guarda en el localStorage del navegador.
-   Cuando exista backend, solo hay que reemplazar las funciones de la
-   seccion "2. ALMACENAMIENTO" (leer / guardar / borrar) y las de
-   usuarios/datos de la seccion 3, el resto de la logica se mantiene.
-
-   Secciones:
-     1. Constantes y utilidades
-     2. Almacenamiento
-     3. Usuarios, sesion y datos del hogar
-     4. Calculos (resumen del mes, alertas, sugerencias)
-     5. Operaciones (registrar / eliminar gastos, pagos, medios, presupuestos)
-     6. Interfaz comun (modales, avisos, marco de la app)
-     7. Paginas: login, registro, dashboard, gastos, registrar, medios,
-        presupuestos, reportes, alertas
-   ===================================================================== */
 (function () {
     'use strict';
 
-    /* =================================================================
-       1. CONSTANTES Y UTILIDADES
-       ================================================================= */
+    /* 1. CONSTANTES Y UTILIDADES */
     const CORREO_DEMO = 'familia.morales@housepay.co';
     const CLAVE_DEMO = '12345678';
     const K_USUARIOS = 'hp_usuarios';
@@ -31,8 +11,8 @@
     const VERSION_DATOS = 1;
     const VALOR_MIN = 100;
     const VALOR_MAX = 50000000;
-    const DIAS_ALERTA_VENCIMIENTO = 3;   // pagos que vencen en <= 3 dias generan alerta
-    const UMBRAL_CERCA = 0.9;            // 90% del rubro = "cerca del limite"
+    const DIAS_ALERTA_VENCIMIENTO = 3;   // pagos con vencimiento en 3 dias o menos disparan una alerta
+    const UMBRAL_CERCA = 0.9;            // 90% del rubro indica que ya esta cerca del limite
 
     const CATS = [
         { nombre: 'Arriendo', corto: 'Arriendo', titulo: 'Arriendo', icono: 'fa-house', color: 'indigo' },
@@ -71,13 +51,13 @@
     const mesAnterior = (ym, n) => { const p = ym.split('-').map(Number); const d = new Date(p[0], p[1] - 1 - n, 1); return d.getFullYear() + '-' + pad(d.getMonth() + 1); };
     const diasDelMes = (ym) => { const p = ym.split('-').map(Number); return new Date(p[0], p[1], 0).getDate(); };
 
-    // $1.267.900 (separador de miles con punto, como en Colombia)
+    // Formato colombiano para COP: $1.267.900 con separador de miles en punto
     const pesos = (n) => {
         const neg = n < 0;
         const s = String(Math.round(Math.abs(n))).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         return (neg ? '-' : '') + '$' + s;
     };
-    // $2.9M, $3.03M, $850k
+    // Formato abreviado para resúmenes: $2.9M, $3.03M, $850k
     const pesosCorto = (n) => {
         if (n >= 1000000) return '$' + Number((n / 1000000).toFixed(2)) + 'M';
         if (n >= 1000) return '$' + Math.round(n / 1000) + 'k';
@@ -90,9 +70,7 @@
     const suma = (arr) => arr.reduce((a, g) => a + g.valor, 0);
     const plural = (n, uno, varios) => n + ' ' + (n === 1 ? uno : varios);
 
-    /* =================================================================
-       2. ALMACENAMIENTO (localStorage con respaldo en memoria)
-       ================================================================= */
+    /* 2. ALMACENAMIENTO (localStorage con respaldo en memoria) */
     const memoria = {};
     function leer(clave, defecto) {
         try {
@@ -115,7 +93,7 @@
             const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(texto));
             return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
         }
-        // respaldo simple si el navegador no ofrece crypto.subtle
+        // Respaldo simple si el navegador no soporta crypto.subtle
         let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
         for (let i = 0; i < texto.length; i++) {
             const ch = texto.charCodeAt(i);
@@ -127,11 +105,9 @@
         return 'c' + (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(16);
     }
 
-    /* =================================================================
-       3. USUARIOS, SESION Y DATOS DEL HOGAR
-       ================================================================= */
-    let U = null;   // usuario con sesion
-    let D = null;   // datos de su hogar
+    /* 3. USUARIOS, SESION Y DATOS DEL HOGAR */
+    let U = null;   // usuario activo en la sesion actual
+    let D = null;   // datos del hogar asociados al usuario actual
     let repintar = function () { };
 
     const usuarios = () => leer(K_USUARIOS, []);
@@ -189,8 +165,8 @@
         return { version: VERSION_DATOS, hogar: hogar, presupuestoTotal: 0, presupuestos: presupuestos, medios: [], gastos: [], pagos: [] };
     }
 
-    // Datos de ejemplo del hogar demo. Las fechas son relativas a hoy para que
-    // las alertas y los "proximos pagos" siempre tengan sentido.
+    // Datos de ejemplo para el hogar demo. Las fechas se calculan en funcion de la
+    // fecha actual para que las alertas y los pagos proximos sigan teniendo sentido.
     function datosDemo() {
         const h = hoy();
         const ym = mesDe(h);
@@ -268,9 +244,7 @@
     }
     const guardarDatos = () => guardar(K_DATOS + U.correo, D);
 
-    /* =================================================================
-       4. CALCULOS
-       ================================================================= */
+    /* 4. CALCULOS */
     const gastosMes = (ym) => D.gastos.filter((g) => mesDe(g.fecha) === ym);
     const medioPor = (id) => D.medios.find((m) => m.id === id);
 
@@ -341,7 +315,7 @@
         return arr;
     }
 
-    // Avisos (no bloqueantes) si un gasto hace que se pase el presupuesto
+    // Avisos informativos que no bloquean la accion cuando un gasto empuja el presupuesto por encima del limite
     function avisosPresupuesto(categoria, valor, fecha) {
         const ym = mesDe(fecha);
         const avisos = [];
@@ -358,7 +332,7 @@
         return avisos;
     }
 
-    // Sugerencia para equilibrar: mover presupuesto de un rubro con holgura al que se paso
+    // Sugerencia para equilibrar presupuestos: mover recursos desde un rubro con holgura hacia el que se excedio
     function sugerenciaEquilibrio() {
         const pc = porCategoria(mesActual());
         const excedidos = CATS
@@ -375,9 +349,7 @@
         return { exceso: ex, donante: donante };
     }
 
-    /* =================================================================
-       5. OPERACIONES
-       ================================================================= */
+    /* 5. OPERACIONES */
     function validarGastoBasico(d) {
         const nombre = (d.nombre || '').trim().replace(/\s+/g, ' ');
         if (nombre.length < 3 || nombre.length > 80) return 'El nombre del gasto debe tener entre 3 y 80 caracteres.';
@@ -494,9 +466,7 @@
         return { ok: true, mensaje: 'Presupuesto actualizado.' };
     }
 
-    /* =================================================================
-       6. INTERFAZ COMUN
-       ================================================================= */
+    /* 6. INTERFAZ COMUN */
     function toast(msg, tipo) {
         let c = $('.toast-contenedor');
         if (!c) { c = document.createElement('div'); c.className = 'toast-contenedor'; document.body.appendChild(c); }
@@ -722,9 +692,7 @@
         if (ajustar) { e.preventDefault(); abrirModalPresupuesto(); }
     });
 
-    /* =================================================================
-       7. PAGINAS
-       ================================================================= */
+    /* 7. PAGINAS */
 
     /* ---------- Login ---------- */
     async function initLogin() {
@@ -986,7 +954,7 @@
         inpFecha.value = hoy();
         inpFecha.max = hoy();
 
-        // chips +20k / +50k / +100k
+        // Acciones rapidas para sumar valor: +20k, +50k y +100k
         $$('.etiqueta-gris', form).forEach((chip) => {
             const m = /\+(\d+)k/i.exec(chip.textContent);
             if (!m) return;
@@ -999,7 +967,7 @@
             chip.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sumar(); } });
         });
 
-        // modo "pago pendiente": no hay fecha de pago ni medio, la fecha de vencimiento es obligatoria
+        // Modo "pago pendiente": no se registra fecha ni medio real; la fecha de vencimiento si es obligatoria
         chkPend.addEventListener('change', () => {
             const p = chkPend.checked;
             campoFecha.style.display = p ? 'none' : '';
@@ -1088,7 +1056,7 @@
             '<option value="credito">Tarjeta de credito</option><option value="debito">Tarjeta debito</option>' +
             '<option value="transferencia">Transferencia bancaria / Nequi</option><option value="efectivo">Efectivo</option>';
 
-        // campo extra: cupo (credito) o saldo (efectivo)
+        // Campo adicional: cupo para credito o saldo inicial para efectivo
         const extra = document.createElement('div');
         extra.className = 'campo';
         extra.style.display = 'none';
@@ -1332,9 +1300,7 @@
         repintar = renderAlertas;
     }
 
-    /* =================================================================
-       ARRANQUE
-       ================================================================= */
+    /* 7. PAGINAS */
     function init() {
         const pagina = document.body.dataset.pagina;
         if (pagina === 'login') return initLogin();
