@@ -796,3 +796,68 @@ img {
   border-radius: 12px 12px 0 0;
   background-color: #7dd3fc;
 }
+
+/* =====================================================================
+   Estilos que usa app.js (avisos, toasts, modales abiertos por JS, impresion)
+   ===================================================================== */
+[hidden] { display: none !important; }
+
+/* modal abierto desde JavaScript (el de medios de pago sigue usando :target) */
+.fondo-modal.abierto { display: flex; }
+
+/* mensajes dentro de formularios */
+.mensaje-error {
+  background-color: var(--rosa-50);
+  border: 1px solid var(--rosa-200);
+  color: var(--rosa-800);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* avisos emergentes */
+.toast-contenedor {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: calc(100vw - 48px);
+}
+.toast {
+  background-color: var(--gris-900);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  max-width: 380px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+}
+.toast-error { background-color: var(--rosa-600); }
+
+/* estado vacio de listas y tablas */
+.vacio {
+  text-align: center;
+  color: var(--gris-500);
+  font-size: 13px;
+  padding: 24px 12px;
+}
+
+/* chips clicables (+20k, +50k, +100k) */
+.chip-click { cursor: pointer; user-select: none; }
+.chip-click:hover { background-color: var(--gris-200); }
+
+.boton:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* "Exportar PDF" usa la impresion del navegador: se oculta el menu y los botones */
+@media print {
+  .barra-lateral, .topbar, .toast-contenedor, .fondo-modal, #btn-exportar, #btn-equilibrar { display: none !important; }
+  .app { display: block; }
+  .zona-vistas { padding: 0; }
+  body { background: #ffffff; }
+}
