@@ -1,16 +1,28 @@
+/* =====================================================================
+   House Pay Assistant - logica de la aplicacion
+   ---------------------------------------------------------------------
+   Sin base de datos: todo se guarda en el localStorage del navegador.
+   Cuando exista backend, solo hay que reemplazar las funciones de la
+   seccion "2. ALMACENAMIENTO" (leer / guardar / borrar) y las de
+   usuarios/datos de la seccion 3, el resto de la logica se mantiene.
+
+   Secciones:
+     1. Constantes y utilidades
+     2. Almacenamiento
+     3. Usuarios, sesion y datos del hogar
+     4. Calculos (resumen del mes, alertas, sugerencias)
+     5. Operaciones (registrar / eliminar gastos, pagos, medios, presupuestos)
+     6. Interfaz comun (modales, avisos, marco de la app)
+     7. Paginas: login, registro, dashboard, gastos, registrar, medios,
+        presupuestos, reportes, alertas
+   ===================================================================== */
 (function () {
+    'use strict';
 
-    /*
-     * Aplicacion principal del hogar financiero.
-     * El archivo centraliza:
-     * - configuracion de categorias, presupuestos y medios de pago,
-     * - autenticacion local del usuario en localStorage,
-     * - logica de gastos, pagos pendientes y alertas,
-     * - render de cada pagina (dashboard, gastos, presupuestos, reportes, alertas).
-     */
-
-    /* Constantes */
-    const CORREO_DEMO = 'familia.morales@housepay.co'
+    /* =================================================================
+       1. CONSTANTES Y UTILIDADES
+       ================================================================= */
+    const CORREO_DEMO = 'familia.morales@housepay.co';
     const CLAVE_DEMO = '12345678';
     const K_USUARIOS = 'hp_usuarios';
     const K_SESION = 'hp_sesion';
@@ -19,8 +31,8 @@
     const VERSION_DATOS = 1;
     const VALOR_MIN = 100;
     const VALOR_MAX = 50000000;
-    const DIAS_ALERTA_VENCIMIENTO = 3;
-    const UMBRAL_CERCA = 0.9;
+    const DIAS_ALERTA_VENCIMIENTO = 3;   // pagos que vencen en <= 3 dias generan alerta
+    const UMBRAL_CERCA = 0.9;            // 90% del rubro = "cerca del limite"
 
     const CATS = [
         { nombre: 'Arriendo', corto: 'Arriendo', titulo: 'Arriendo', icono: 'fa-house', color: 'indigo' },
@@ -59,7 +71,13 @@
     const mesAnterior = (ym, n) => { const p = ym.split('-').map(Number); const d = new Date(p[0], p[1] - 1 - n, 1); return d.getFullYear() + '-' + pad(d.getMonth() + 1); };
     const diasDelMes = (ym) => { const p = ym.split('-').map(Number); return new Date(p[0], p[1], 0).getDate(); };
 
-    // Separador con el punto para los pesos colombianos
+    // $1.267.900 (separador de miles con punto, como en Colombia)
+    const pesos = (n) => {
+        const neg = n < 0;
+        const s = String(Math.round(Math.abs(n))).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        return (neg ? '-' : '') + '$' + s;
+    };
+    // $2.9M, $3.03M, $850k
     const pesosCorto = (n) => {
         if (n >= 1000000) return '$' + Number((n / 1000000).toFixed(2)) + 'M';
         if (n >= 1000) return '$' + Math.round(n / 1000) + 'k';
@@ -72,9 +90,9 @@
     const suma = (arr) => arr.reduce((a, g) => a + g.valor, 0);
     const plural = (n, uno, varios) => n + ' ' + (n === 1 ? uno : varios);
 
-    // Almacenamiento local de datos en el navegador.
-    // Se usa localStorage como fuente principal y un objeto en memoria
-    // como respaldo para situaciones donde localStorage falla.
+    /* =================================================================
+       2. ALMACENAMIENTO (localStorage con respaldo en memoria)
+       ================================================================= */
     const memoria = {};
     function leer(clave, defecto) {
         try {
@@ -85,22 +103,21 @@
         }
     }
     function guardar(clave, valor) {
-        try {
-            localStorage.setItem(clave, JSON.stringify(valor));
-        } catch (e) {
-
-        }
+        try { localStorage.setItem(clave, JSON.stringify(valor)); } catch (e) { memoria[clave] = valor; }
+    }
+    function borrar(clave) {
+        try { localStorage.removeItem(clave); } catch (e) { /* nada */ }
         delete memoria[clave];
     }
 
     async function hashTexto(texto) {
         if (window.crypto && window.crypto.subtle && window.TextEncoder) {
             const buf = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(texto));
-            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+            return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
         }
-
+        // respaldo simple si el navegador no ofrece crypto.subtle
         let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
-        for (let i = 0, ch; i < texto.length; i++) {
+        for (let i = 0; i < texto.length; i++) {
             const ch = texto.charCodeAt(i);
             h1 = Math.imul(h1 ^ ch, 2654435761);
             h2 = Math.imul(h2 ^ ch, 1597334677);
@@ -110,10 +127,11 @@
         return 'c' + (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(16);
     }
 
-    // Usuarios, sesion y datos del hogar.
-    // U contiene el usuario activo y D el estado financiero del hogar actual.
-    let U = null;
-    let D = null;
+    /* =================================================================
+       3. USUARIOS, SESION Y DATOS DEL HOGAR
+       ================================================================= */
+    let U = null;   // usuario con sesion
+    let D = null;   // datos de su hogar
     let repintar = function () { };
 
     const usuarios = () => leer(K_USUARIOS, []);
@@ -171,6 +189,8 @@
         return { version: VERSION_DATOS, hogar: hogar, presupuestoTotal: 0, presupuestos: presupuestos, medios: [], gastos: [], pagos: [] };
     }
 
+    // Datos de ejemplo del hogar demo. Las fechas son relativas a hoy para que
+    // las alertas y los "proximos pagos" siempre tengan sentido.
     function datosDemo() {
         const h = hoy();
         const ym = mesDe(h);
@@ -248,7 +268,9 @@
     }
     const guardarDatos = () => guardar(K_DATOS + U.correo, D);
 
-    // Calculos
+    /* =================================================================
+       4. CALCULOS
+       ================================================================= */
     const gastosMes = (ym) => D.gastos.filter((g) => mesDe(g.fecha) === ym);
     const medioPor = (id) => D.medios.find((m) => m.id === id);
 
@@ -285,8 +307,6 @@
         return 'Vence en ' + dias + ' dias';
     }
 
-    // Genera las alertas del mes: vencimientos cercanos, presupuestos excedidos
-    // y estados de riesgo para el total del hogar.
     function calcularAlertas() {
         const lista = [];
         const h = hoy();
@@ -321,6 +341,7 @@
         return arr;
     }
 
+    // Avisos (no bloqueantes) si un gasto hace que se pase el presupuesto
     function avisosPresupuesto(categoria, valor, fecha) {
         const ym = mesDe(fecha);
         const avisos = [];
@@ -337,6 +358,7 @@
         return avisos;
     }
 
+    // Sugerencia para equilibrar: mover presupuesto de un rubro con holgura al que se paso
     function sugerenciaEquilibrio() {
         const pc = porCategoria(mesActual());
         const excedidos = CATS
@@ -353,9 +375,9 @@
         return { exceso: ex, donante: donante };
     }
 
-    // Operaciones de negocio: validaciones, registro de gastos y pagos pendientes.
-    // Estas funciones son el centro de la logica financiera y se reutilizan desde
-    // varias vistas del sistema.
+    /* =================================================================
+       5. OPERACIONES
+       ================================================================= */
     function validarGastoBasico(d) {
         const nombre = (d.nombre || '').trim().replace(/\s+/g, ' ');
         if (nombre.length < 3 || nombre.length > 80) return 'El nombre del gasto debe tener entre 3 y 80 caracteres.';
@@ -472,7 +494,9 @@
         return { ok: true, mensaje: 'Presupuesto actualizado.' };
     }
 
-    // Interfaz comun
+    /* =================================================================
+       6. INTERFAZ COMUN
+       ================================================================= */
     function toast(msg, tipo) {
         let c = $('.toast-contenedor');
         if (!c) { c = document.createElement('div'); c.className = 'toast-contenedor'; document.body.appendChild(c); }
@@ -643,6 +667,7 @@
         });
     }
 
+    /* ---- Modal: ajustar presupuesto ---- */
     function abrirModalPresupuesto() {
         const filas = CATS.map((c, i) =>
             '<div class="campo"><label for="pr-' + i + '">' + esc(c.titulo) + '</label>' +
@@ -689,6 +714,7 @@
         });
     }
 
+    /* ---- Acciones globales con delegacion de eventos ---- */
     document.addEventListener('click', (e) => {
         const pagar = e.target.closest('[data-pagar]');
         if (pagar) { e.preventDefault(); abrirModalPago(pagar.dataset.pagar); return; }
@@ -696,9 +722,11 @@
         if (ajustar) { e.preventDefault(); abrirModalPresupuesto(); }
     });
 
-    // Paginas
+    /* =================================================================
+       7. PAGINAS
+       ================================================================= */
 
-    /* Login */
+    /* ---------- Login ---------- */
     async function initLogin() {
         await asegurarDemo();
         const form = $('#form-login');
@@ -723,7 +751,7 @@
         });
     }
 
-    /* Registro */
+    /* ---------- Registro ---------- */
     function initRegistro() {
         const form = $('#form-registro');
         form.addEventListener('submit', async (e) => {
@@ -737,7 +765,7 @@
         });
     }
 
-    /* Dashboard */
+    /* ---------- Dashboard ---------- */
     function htmlFilaPago(p) {
         const dias = diasEntre(hoy(), p.vence);
         const cat = catPor(p.categoria);
@@ -785,11 +813,13 @@
             sin: '<span class="texto-pequeno">Define tu presupuesto</span>'
         }[r.nivel];
 
+        // proximos pagos (los 3 mas cercanos)
         const pagos = D.pagos.slice().sort((a, b) => (a.vence < b.vence ? -1 : 1)).slice(0, 3);
         $('#dash-pagos').innerHTML = pagos.length
             ? pagos.map(htmlFilaPago).join('')
             : '<p class="vacio">No tienes pagos pendientes. Puedes programar uno desde <a href="registrar.html" style="color:var(--azul-600); font-weight:700;">Registrar Gasto</a>.</p>';
 
+        // distribucion por categoria
         const visibles = CATS.filter((c) => (D.presupuestos[c.nombre] || 0) > 0 || pc[c.nombre] > 0);
         $('#dash-cats').innerHTML = visibles.length ? visibles.map((c) => {
             const lim = D.presupuestos[c.nombre] || 0;
@@ -807,6 +837,7 @@
         const configuradas = CATS.filter((c) => (D.presupuestos[c.nombre] || 0) > 0).length;
         $('#dash-cats-pie').textContent = plural(configuradas, 'categoria configurada', 'categorias configuradas') + ' en este ciclo';
 
+        // ultimos movimientos
         const delMes = gastosMes(ym);
         const recientes = ordenarGastos(D.gastos).slice(0, 5);
         $('#dash-movs').innerHTML = recientes.length
@@ -815,7 +846,7 @@
         $('#dash-movs-link').textContent = 'Ver todos los gastos (' + delMes.length + ')';
     }
 
-    /* Gastos */
+    /* ---------- Gastos ---------- */
     function initGastos() {
         const params = new URLSearchParams(location.search);
         const f = { q: params.get('q') || '', categoria: params.get('categoria') || '', medio: '', periodo: params.get('periodo') || '', visibles: 10 };
@@ -936,9 +967,7 @@
         });
     }
 
-    /* Registrar gasto */
-    // Inicializa el formulario de registro de gastos y pagos programados.
-    // Aqui se decide si el movimiento se registra directamente o queda como pago futuro.
+    /* ---------- Registrar gasto ---------- */
     function initRegistrar() {
         const form = $('#form-gasto');
         const selMedio = $('#g-medio');
@@ -957,6 +986,7 @@
         inpFecha.value = hoy();
         inpFecha.max = hoy();
 
+        // chips +20k / +50k / +100k
         $$('.etiqueta-gris', form).forEach((chip) => {
             const m = /\+(\d+)k/i.exec(chip.textContent);
             if (!m) return;
@@ -969,6 +999,7 @@
             chip.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sumar(); } });
         });
 
+        // modo "pago pendiente": no hay fecha de pago ni medio, la fecha de vencimiento es obligatoria
         chkPend.addEventListener('change', () => {
             const p = chkPend.checked;
             campoFecha.style.display = p ? 'none' : '';
@@ -998,6 +1029,7 @@
                 location.href = 'dashboard.html';
                 return;
             }
+            // validar antes de preguntar por el presupuesto
             let err = validarGastoBasico(datos);
             if (!err && !esFechaValida(datos.fecha)) err = 'Selecciona la fecha de pago.';
             if (!err) err = validarMedioParaPagar(medioPor(datos.medioId), datos.valor);
@@ -1011,8 +1043,7 @@
         });
     }
 
-    /* Medios de pago */
-    // Genera la vista visual de cada medio de pago registrado.
+    /* ---------- Medios de pago ---------- */
     function htmlTarjetaMedio(m) {
         const t = TIPOS_MEDIO[m.tipo];
         const oscuro = m.tipo === 'debito';
@@ -1056,6 +1087,8 @@
         selTipo.innerHTML = '<option value="" selected disabled>Selecciona tipo de medio...</option>' +
             '<option value="credito">Tarjeta de credito</option><option value="debito">Tarjeta debito</option>' +
             '<option value="transferencia">Transferencia bancaria / Nequi</option><option value="efectivo">Efectivo</option>';
+
+        // campo extra: cupo (credito) o saldo (efectivo)
         const extra = document.createElement('div');
         extra.className = 'campo';
         extra.style.display = 'none';
@@ -1091,8 +1124,7 @@
         repintar();
     }
 
-    /* Presupuesto */
-    // Renderiza cada tarjeta del presupuesto por categoria.
+    /* ---------- Presupuestos ---------- */
     function htmlTarjetaPresupuesto(c, g) {
         const lim = D.presupuestos[c.nombre] || 0;
         const pct = lim > 0 ? Math.round(g / lim * 100) : 0;
@@ -1142,8 +1174,7 @@
         if (location.hash === '#ajustar') abrirModalPresupuesto();
     }
 
-    /* Reportes */
-    // Construye los graficos y resumentes del comportamiento del hogar por mes.
+    /* ---------- Reportes ---------- */
     function initReportes() {
         $('#btn-exportar').addEventListener('click', (e) => { e.preventDefault(); window.print(); });
 
@@ -1166,6 +1197,8 @@
                     '<span class="' + (actual ? '' : 'texto-pequeno') + '" style="' + (actual ? 'font-size:12px; font-weight:700; color:var(--azul-600);' : '') + '">' + nombre + '</span>' +
                     '</div>';
             }).join('');
+
+            // participacion porcentual del mes en curso
             const pc = porCategoria(ym);
             const total = suma(gastosMes(ym));
             const orden = CATS.slice().sort((a, b) => pc[b.nombre] - pc[a.nombre]);
@@ -1230,8 +1263,7 @@
         });
     }
 
-    /* Alertas */
-    // Cada alerta se muestra como un recordatorio accionable para el usuario.
+    /* ---------- Alertas ---------- */
     function htmlAlerta(a) {
         const btnBase = 'boton boton-pequeno';
         if (a.tipo === 'vencimiento') {
@@ -1300,8 +1332,9 @@
         repintar = renderAlertas;
     }
 
-    // Arranque de la aplicacion.
-    // Segun la pagina actual, se inicializa el modulo correspondiente y se valida la sesion.
+    /* =================================================================
+       ARRANQUE
+       ================================================================= */
     function init() {
         const pagina = document.body.dataset.pagina;
         if (pagina === 'login') return initLogin();
@@ -1328,5 +1361,4 @@
     }
 
     init();
-
-})
+})();
